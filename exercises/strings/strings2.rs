@@ -16,6 +16,8 @@ fn main() {
     }
 }
 
-fn is_a_color_word(attempt: &str) -> bool {
-    attempt == "green" || attempt == "blue" || attempt == "red"
+//&str显然不是 但是为什么可以直接和字符串字面值比较 不对吧哥
+fn is_a_color_word(attempt: String) -> bool {
+    attempt == String::from("green") || attempt == String::from("blue") || attempt == String::from("red")
+    //这样就对了
 }

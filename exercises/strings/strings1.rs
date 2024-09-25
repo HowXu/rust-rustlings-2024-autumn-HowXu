@@ -13,5 +13,6 @@ fn main() {
 }
 
 fn current_favorite_color() -> String {
-    "blue"
+    //"blue" 显然这是一个str
+    return String::from("blue");
 }
