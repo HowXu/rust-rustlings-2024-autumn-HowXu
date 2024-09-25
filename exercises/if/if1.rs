@@ -8,7 +8,6 @@ pub fn bigger(a: i32, b: i32) -> i32 {
     // Do not use:
     // - another function call
     // - additional variables
-
     if a > b {
         a
     } else {
@@ -17,6 +16,7 @@ pub fn bigger(a: i32, b: i32) -> i32 {
 }
 
 // Don't mind this for now :)
+//天生的测试单元？
 #[cfg(test)]
 mod tests {
     use super::*;

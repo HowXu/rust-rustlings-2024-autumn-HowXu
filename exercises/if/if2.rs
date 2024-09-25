@@ -5,8 +5,8 @@
 //
 // Execute `rustlings hint if2` or use the `hint` watch subcommand for a hint.
 
-
-pub fn foo_if_fizz(fizzish: &str) -> &str {
+//字符串字面值常量需要使用'static生命周期
+pub fn foo_if_fizz(fizzish: &str) -> &'static str {
     if fizzish == "fizz" {
         "foo"
     } else if fizzish == "fuzz" {
