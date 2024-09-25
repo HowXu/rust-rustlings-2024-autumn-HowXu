@@ -29,12 +29,18 @@ impl Package {
         }
     }
 
-    fn is_international(&self) -> ??? {
+    fn is_international(&self) -> bool {
         // Something goes here...
+        if(self.recipient_country != self.sender_country){
+            return true;
+        }
+
+        false
     }
 
-    fn get_fees(&self, cents_per_gram: i32) -> ??? {
+    fn get_fees(&self, cents_per_gram: i32) -> isize {
         // Something goes here...
+        (self.weight_in_grams * cents_per_gram) as isize
     }
 }
 
@@ -49,6 +55,7 @@ mod tests {
         let recipient_country = String::from("Austria");
 
         Package::new(sender_country, recipient_country, -2210);
+        //assert!(package);
     }
 
     #[test]
