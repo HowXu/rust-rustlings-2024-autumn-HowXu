@@ -8,6 +8,10 @@
 #[derive(Debug)]
 enum Message {
     // TODO: define the different variants used below
+    Move{x:isize,y:isize},
+    Echo(String),
+    ChangeColor(isize,isize,isize),
+    Quit
 }
 
 impl Message {
@@ -15,7 +19,15 @@ impl Message {
         println!("{:?}", self);
     }
 }
+/** 只能用match语法访问属性值
+    match messages {
+        Messages::Move{x,y} =>{
+            println!...
+        },
+        Message::...
+    }
 
+**/
 fn main() {
     let messages = [
         Message::Move { x: 10, y: 30 },
