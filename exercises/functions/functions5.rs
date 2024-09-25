@@ -9,6 +9,7 @@ fn main() {
     println!("The square of 3 is {}", answer);
 }
 
+// -> 表返回值 我那使用:的kotlin故人
 fn square(num: i32) -> i32 {
-    num * num
+    return (num * num);
 }

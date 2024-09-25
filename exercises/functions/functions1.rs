@@ -9,5 +9,5 @@ fn main() {
 }
 
 fn call_me() {
-
+    println!("call me maybe )")
 }

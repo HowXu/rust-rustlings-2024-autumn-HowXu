@@ -8,6 +8,10 @@
 // Execute `rustlings hint functions4` or use the `hint` watch subcommand for a
 // hint.
 
+// 奇怪的rust规则 返回值可以不用return和;
+// price - 3; is wrong
+// return price - 3 and return price - 3; is right
+
 
 fn main() {
     let original_price = 51;
@@ -16,12 +20,12 @@ fn main() {
 
 fn sale_price(price: i32) -> i32 {
     if is_even(price) {
-        price - 10
+        return price - 10;
     } else {
         price - 3
     }
 }
 
 fn is_even(num: i32) -> bool {
-    num % 2 == 0
+    return (num % 2 == 0); //reduce reading cost ()
 }
