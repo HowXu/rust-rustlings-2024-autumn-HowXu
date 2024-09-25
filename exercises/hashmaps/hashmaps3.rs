@@ -39,6 +39,22 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be the number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+
+        //不存在时创建一个空队伍 这个和vec的顺序不一样啊孩子
+        scores.entry(team_1_name.clone()).or_insert(Team {goals_scored:0,goals_conceded:0});
+        scores.entry(team_2_name.clone()).or_insert(Team {goals_scored:0,goals_conceded:0});
+
+        //是否存在 进而进行中球，被射球计算
+        if let Some(x) = scores.get_mut(&team_1_name){
+            x.goals_scored += team_1_score;
+            x.goals_conceded += team_2_score;
+        }
+
+        if let Some(x) = scores.get_mut(&team_2_name){
+            x.goals_scored += team_2_score;
+            x.goals_conceded += team_1_score;
+        }
+
     }
     scores
 }
