@@ -16,7 +16,7 @@
 
 // Put your function here!
 fn calculate_price_of_apples(number: i32) -> i32 {
-
+    //帮我写好了 原来这个意思T_
     if number > 40 {
         number
     } else {
