@@ -11,7 +11,8 @@ mod sausage_factory {
         String::from("Ginger")
     }
 
-    fn make_sausage() {
+    //关键词pub让方法对外访问
+    pub fn make_sausage() {
         get_secret_recipe();
         println!("sausage!");
     }
