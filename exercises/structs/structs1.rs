@@ -5,7 +5,7 @@
 // Execute `rustlings hint structs1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+//
 
 //从现在开始我来拯救NCU排名
 

@@ -8,7 +8,7 @@
 // Execute `rustlings hint modules3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+//
 
 // TODO: Complete this use statement
 
