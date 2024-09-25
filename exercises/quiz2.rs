@@ -32,11 +32,27 @@ mod my_module {
     use super::Command;
 
     // TODO: Complete the function signature!
-    pub fn transformer(input: ???) -> ??? {
+    pub fn transformer(input: Vec<(String,Command)>) -> Vec<String> {
         // TODO: Complete the output declaration!
-        let mut output: ??? = vec![];
+        let mut output: Vec<String> = Vec::new(); //空向量就可以了不用vec![]
         for (string, command) in input.iter() {
             // TODO: Complete the function body. You can do it!
+            match (string, command) {
+                //元组单元素解析
+                (a,Command::Uppercase) => {
+                    output.push(a.to_uppercase());
+                },
+                (a,Command::Trim) => {
+                    output.push(a.trim().to_string());
+                },
+                (a,Command::Append(i)) => {
+                    let mut b:String = a.to_owned(); //因为a,i是引用值这里应该to_owned拿一份，因为后续也用不到不用担心所有权问题
+                    for a in 0..(i.to_owned() as i64) {
+                        b.push_str("bar");
+                    }
+                    output.push(b.to_string());
+                }
+            }
         }
         output
     }
@@ -45,7 +61,7 @@ mod my_module {
 #[cfg(test)]
 mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
-    use ???;
+    use crate::my_module::transformer;
     use super::Command;
 
     #[test]
