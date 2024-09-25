@@ -5,6 +5,8 @@
 
 
 const NUMBER: i32 = 3;
+const num: isize = 0xEF09;
 fn main() {
     println!("Number {}", NUMBER);
+    println!("num is {num}");
 }

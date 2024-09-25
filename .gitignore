@@ -15,3 +15,8 @@ public/
 
 # Local Netlify folder
 .netlify
+
+# fuck files
+Cargo.lock
+flake.lock
+temp*

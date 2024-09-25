@@ -5,6 +5,11 @@
 
 
 fn main() {
+
+    //Shadowing
+    //重新let可以一名多用
+    //but will it really cause bugs ?
+
     let number = "T-H-R-E-E"; // don't change this line
     println!("Spell a Number : {}", number);
     let number = 3; // don't rename this variable
