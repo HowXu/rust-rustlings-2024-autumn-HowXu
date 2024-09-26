@@ -22,7 +22,7 @@ fn temp_file() -> String {
         .filter(|c| c.is_alphanumeric())
         .collect();
 
-    format!("build\\binary\\temp_{}_{thread_id}", process::id())
+    format!("./temp_{}_{thread_id}", process::id())
 }
 
 // The mode of the exercise.
