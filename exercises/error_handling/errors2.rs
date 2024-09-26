@@ -26,9 +26,25 @@ use std::num::ParseIntError;
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
-    let qty = item_quantity.parse::<i32>();
+    
+    //不能手动抛出ParseintError，只能拿别人的用
+    /*
 
-    Ok(qty * cost_per_item + processing_fee)
+    if let Ok(qty) = item_quantity.parse::<i32>() {
+        Ok(qty * cost_per_item + processing_fee)
+    } else {
+        Err(ParseIntError.new(IntErrorKind.InvalidDigit))
+    }
+
+     */
+
+    //better way Ok(qty? * cost_per_item + processing_fee)
+    //当qty不为Error时进行，为Err继续抛出
+
+    match item_quantity.parse::<i32>(){
+        Ok(qty) => Ok(qty * cost_per_item + processing_fee),
+        Err(e) => Err(e)
+    }
 }
 
 #[cfg(test)]
