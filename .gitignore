@@ -20,3 +20,4 @@ public/
 Cargo.lock
 flake.lock
 temp*
+build/
