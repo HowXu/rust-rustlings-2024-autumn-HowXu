@@ -61,7 +61,7 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
     //todo!();
-    //解包这个collection 是个数组 转iter
+    //解包这个collection 是个切片 转iter
     //map：转换数据。接受一个闭包并为迭代器中的每个元素调用该闭包，然后返回一个新的迭代器，其中包含闭包返回的值。
     //然后获取向量并计数
 
