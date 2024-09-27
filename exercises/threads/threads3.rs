@@ -3,8 +3,7 @@
 // Execute `rustlings hint threads3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
+//线程间通信
 use std::sync::mpsc;
 use std::sync::Arc;
 use std::thread;
@@ -30,11 +29,15 @@ fn send_tx(q: Queue, tx: mpsc::Sender<u32>) -> () {
     let qc = Arc::new(q);
     let qc1 = Arc::clone(&qc);
     let qc2 = Arc::clone(&qc);
+    let tx_1 = tx.clone();
+    let tx_2 = tx.clone();
+
+    //tx第一次使用就move到了循环里然后就死了 应该分发一下
 
     thread::spawn(move || {
         for val in &qc1.first_half {
             println!("sending {:?}", val);
-            tx.send(*val).unwrap();
+            tx_1.send(*val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
@@ -42,7 +45,7 @@ fn send_tx(q: Queue, tx: mpsc::Sender<u32>) -> () {
     thread::spawn(move || {
         for val in &qc2.second_half {
             println!("sending {:?}", val);
-            tx.send(*val).unwrap();
+            tx_2.send(*val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
