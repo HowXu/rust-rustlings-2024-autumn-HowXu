@@ -88,21 +88,21 @@ impl<T> LinkedList<T> {
 
         //不断从原先的self.end获得前一个节点的指针
         while let Some(ptr) = cache {
-            //先存起来
+            //先存前一个 这个就既拿到前一个也拿到后一个
             cache = unsafe { (*ptr.as_ptr()).prev };
             //把ptr的next设置为它自己的prev
             unsafe {
                 (*ptr.as_ptr()).next = cache;
             }
-            //再把slef.end更新为ptr
+            //再把slef.end更新为ptr 并把ptr的prev设置为end
             unsafe {
                 self.end = Some(ptr);
+                (*ptr.as_ptr()).prev = self.end;
             }
         }
-        // 其实这里已经可以通过测试了，但是因为self.start是原来的end，现在还带有一个prev 而最后加入的end是原来的start 还有next 
+        // 其实这里已经可以通过测试了，但是因为self.start是原来的end，现在还带有一个prev 
         // 美化一下
         unsafe {
-            (*self.end.unwrap().as_ptr()).next = None;
             (*self.start.unwrap().as_ptr()).prev = None;
         }
     }
