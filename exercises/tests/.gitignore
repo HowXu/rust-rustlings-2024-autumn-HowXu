@@ -1,0 +1,24 @@
+*.swp
+target/
+**/*.rs.bk
+.DS_Store
+*.pdb
+exercises/clippy/Cargo.toml
+exercises/clippy/Cargo.lock
+rust-project.json
+.idea
+.vscode/*
+!.vscode/extensions.json
+*.iml
+*.o
+public/
+
+# Local Netlify folder
+.netlify
+
+# fuck files
+Cargo.lock
+Cargo.toml
+flake.lock
+temp*
+build/

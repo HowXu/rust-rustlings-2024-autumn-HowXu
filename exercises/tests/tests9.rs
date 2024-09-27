@@ -27,17 +27,25 @@
 //
 // You should NOT modify any existing code except for adding two lines of attributes.
 
-// I AM NOT DONE
+// https://rustwiki.org/zh-CN/std/keyword.extern.html
 
 extern "Rust" {
+    //这个是导出部分 有点头文件那个味道
+    #[no_mangle]
     fn my_demo_function(a: u32) -> u32;
+    #[no_mangle]
+    #[link_name = "my_demo_function"] //这个声明使二者相同 两个函数现在都是引用Foo的my_demo_function alias比原来长无敌了
+    //不是#[link(name = "my_c_library")] 这个表示从别的c库拿
     fn my_demo_function_alias(a: u32) -> u32;
 }
 
 mod Foo {
     // No `extern` equals `extern "Rust"`.
-    fn my_demo_function(a: u32) -> u32 {
-        a
+
+    //这个是被导出的函数 必须是pub才能引用 声明extern导出 
+    #[no_mangle]
+    pub extern fn my_demo_function(a: u32) -> u32 {
+        return a;
     }
 }
 
