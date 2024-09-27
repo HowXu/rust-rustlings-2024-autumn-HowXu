@@ -35,7 +35,14 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+
+    //todo!();
+    //根据迭代器匹配Progress然后返回usize
+
+    //.values().into_iter()
+    //不用values而构造后面的闭包可以简单一点
+    //.into_iter()....(|(_,&x)|)
+    map.values().into_iter().filter(|&&x| x == value).count()
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -54,9 +61,14 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
-}
+    //todo!();
+    //解包这个collection 是个数组 转iter
+    //map：转换数据。接受一个闭包并为迭代器中的每个元素调用该闭包，然后返回一个新的迭代器，其中包含闭包返回的值。
+    //然后获取向量并计数
 
+    collection.into_iter().map(|x| count_iterator(x,value)).collect::<Vec<usize>>().into_iter().sum()
+    //collection.into_iter().map(|x| count_iterator(x,value)).sum()
+}
 #[cfg(test)]
 mod tests {
     use super::*;

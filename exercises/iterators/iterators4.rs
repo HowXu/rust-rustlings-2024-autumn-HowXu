@@ -25,6 +25,8 @@ pub fn factorial(mut num: u64) -> u64 {
     }
     //这是什么写法?
     // (1..=num).product()
+    //这个写法等同的 a指上1元素，b是下一元素，1是初始元素
+    //(1..=num).fold(1,|a,b|a*b)
 }
 
 #[cfg(test)]
