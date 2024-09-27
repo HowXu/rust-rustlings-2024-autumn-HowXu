@@ -21,7 +21,7 @@
 //
 // Execute `rustlings hint arc1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+//多线程使用的智能指针
 
 #![forbid(unused_imports)] // Do not change this, (or the next) line.
 use std::sync::Arc;
@@ -29,12 +29,14 @@ use std::thread;
 
 fn main() {
     let numbers: Vec<_> = (0..100u32).collect();
-    let shared_numbers = // TODO
-    let mut joinhandles = Vec::new();
+    let shared_numbers = Arc::new(numbers);// TODO 创建指针
+    let mut joinhandles = Vec::new(); //线程控制
 
     for offset in 0..8 {
-        let child_numbers = // TODO
+        //指针都要传上一个指针的引用不然所有权转移导致生命周期问题直接死了
+        let child_numbers = Arc::clone(&shared_numbers);// TODO 指针复制
         joinhandles.push(thread::spawn(move || {
+            //这里不用管这里是计数的
             let sum: u32 = child_numbers.iter().filter(|&&n| n % 8 == offset).sum();
             println!("Sum of offset {} is {}", offset, sum);
         }));

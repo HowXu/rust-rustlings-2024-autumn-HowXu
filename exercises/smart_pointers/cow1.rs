@@ -12,7 +12,6 @@
 //
 // Execute `rustlings hint cow1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
 use std::borrow::Cow;
 
@@ -21,9 +20,11 @@ fn abs_all<'a, 'b>(input: &'a mut Cow<'b, [i32]>) -> &'a mut Cow<'b, [i32]> {
         let v = input[i];
         if v < 0 {
             // Clones into a vector if not already owned.
+            //to_mut是拆解Cow获得[i32] 而且可写
             input.to_mut()[i] = -v;
         }
     }
+    //返回副本
     input
 }
 
@@ -37,6 +38,7 @@ mod tests {
         let slice = [-1, 0, 1];
         let mut input = Cow::from(&slice[..]);
         match abs_all(&mut input) {
+            //更改了 就是Owned
             Cow::Owned(_) => Ok(()),
             _ => Err("Expected owned value"),
         }
@@ -49,18 +51,28 @@ mod tests {
         let mut input = Cow::from(&slice[..]);
         match abs_all(&mut input) {
             // TODO
+            //这里全为正数 返回值仍然是原来的指针 因此没有拥有
+            Cow::Borrowed(_) => Ok(()),
+            _ => Err("Expected borrowed value")
         }
     }
 
     #[test]
     fn owned_no_mutation() -> Result<(), &'static str> {
+
         // We can also pass `slice` without `&` so Cow owns it directly. In this
         // case no mutation occurs and thus also no clone, but the result is
         // still owned because it was never borrowed or mutated.
+        
         let slice = vec![0, 1, 2];
+        //所有权转移给cow了
         let mut input = Cow::from(slice);
         match abs_all(&mut input) {
             // TODO
+            //it was never borrowed or mutated.
+            //直接转移所有权 即使没有修改 回来的input是新的值
+            Cow::Owned(_) => Ok(()),
+            _ => Err("Expected owned value")
         }
     }
 
@@ -73,6 +85,9 @@ mod tests {
         let mut input = Cow::from(slice);
         match abs_all(&mut input) {
             // TODO
+            //这里所有权转移后 经过更改 回来的是新的值了
+            Cow::Owned(_) => Ok(()),
+            _ => Err("Expected owned value")
         }
     }
 }
