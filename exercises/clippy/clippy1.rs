@@ -13,7 +13,7 @@ use std::f32;
 use std::f32::consts;
 
 fn main() {
-    //let pi = 3.14f32; 有PI这个东西的
+    //let pi = 3.14f32; 自带有有PI这个东西的
     let radius = 5.00f32;
 
     let area = consts::PI * f32::powi(radius, 2);
