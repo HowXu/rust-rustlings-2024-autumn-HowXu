@@ -1,8 +1,9 @@
 /*
-	queue
-	This question requires you to use queues to implement the functionality of the stac
+    queue
+    This question requires you to use queues to implement the functionality of the stac
 */
-// I AM NOT DONE
+
+//队列
 
 #[derive(Debug)]
 pub struct Queue<T> {
@@ -52,41 +53,61 @@ impl<T> Default for Queue<T> {
     }
 }
 
-pub struct myStack<T>
-{
-	//TODO
-	q1:Queue<T>,
-	q2:Queue<T>
+pub struct myStack<T> {
+    //TODO
+    //用queue实现栈堆
+    q1: Queue<T>,
+    q2: Queue<T>,
 }
 impl<T> myStack<T> {
     pub fn new() -> Self {
         Self {
-			//TODO
-			q1:Queue::<T>::new(),
-			q2:Queue::<T>::new()
+            //TODO
+            q1: Queue::<T>::new(),
+            q2: Queue::<T>::new(),
         }
     }
     pub fn push(&mut self, elem: T) {
         //TODO
+        // 让q1作为主用 q2作为辅助 q2接到数据然后把q1的接上去 然后再把q2转到q1里面
+        // 这个意义上讲q2只在这里一个地方用啊，完全可以使用暂时的变量
+        self.q2.enqueue(elem);
+        while !self.q1.is_empty() {
+            if let Ok(get) = self.q1.dequeue() {
+                self.q2.enqueue(get);
+            }
+        }
+        //这样就把q1转到q2了 然后再轮回去
+        while !self.q2.is_empty() {
+            if let Ok(get) = self.q2.dequeue() {
+                self.q1.enqueue(get);
+            }
+        }
+
+        //最后这个while可以换成 std::mem::swap(&mut self.q1, &mut self.q2); 交换两个queue的地址 
     }
     pub fn pop(&mut self) -> Result<T, &str> {
         //TODO
-		Err("Stack is empty")
+        
+        if self.q1.is_empty() {
+            return Err("Stack is empty");
+        }
+        self.q1.dequeue()
     }
     pub fn is_empty(&self) -> bool {
-		//TODO
-        true
+        //TODO
+        self.q1.is_empty()
     }
 }
 
 #[cfg(test)]
 mod tests {
-	use super::*;
-	
-	#[test]
-	fn test_queue(){
-		let mut s = myStack::<i32>::new();
-		assert_eq!(s.pop(), Err("Stack is empty"));
+    use super::*;
+
+    #[test]
+    fn test_queue() {
+        let mut s = myStack::<i32>::new();
+        assert_eq!(s.pop(), Err("Stack is empty"));
         s.push(1);
         s.push(2);
         s.push(3);
@@ -100,5 +121,5 @@ mod tests {
         assert_eq!(s.pop(), Ok(1));
         assert_eq!(s.pop(), Err("Stack is empty"));
         assert_eq!(s.is_empty(), true);
-	}
+    }
 }
